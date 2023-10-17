@@ -12,6 +12,14 @@ function App() {
   const [transactionType, setTransactionType] = useState('income');
   const [selectedMenu, setSelectedMenu] = useState('addTransaction');
 
+
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+
   const handleTransactionSubmit = () => {
     const newTransaction = {
       name: transactionName,
@@ -26,14 +34,19 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Income and Expense Management</h1>
-      <div>
-        <ul className="menu">
-          <li onClick={() => setSelectedMenu('addTransaction')}>Add Transaction</li>
-          <li onClick={() => setSelectedMenu('transactionHistory')}>Transaction History</li>
-          <li onClick={() => setSelectedMenu('balance')}>Balance</li>
-        </ul>
+      <div className="dropdown">
+      <div className="dropdown-toggle" onClick={toggleDropdown}>
+        <span className="menu-icon">☰</span>
       </div>
+      {isDropdownOpen && (
+        <div className="dropdown-content">
+            <span onClick={() => setSelectedMenu('addTransaction')}>Add Transaction</span>
+            <span onClick={() => setSelectedMenu('transactionHistory')}>Transaction History</span>
+            <span onClick={() => setSelectedMenu('balance')}>Balance</span>
+        </div>
+      )}
+    </div>
+      <h1>Income and Expense Management</h1>
       <div>
         {selectedMenu === 'addTransaction' && (
           <AddTransaction
