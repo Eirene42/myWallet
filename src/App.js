@@ -1,35 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
-import AddTransaction from './transaction/addTransaction';
-import TransactionHistory from './transaction/transactionHistory';
-import Balance from './transaction/balance';
+import LoginForm from './user/login';
+import RegisterForm from './user/register';
+import BaseTransaction from './transaction/baseTransaction';
+import { Route, Routes, Link } from 'react-router-dom';
 
 function App() {
-
-  const [transactions, setTransactions] = useState([]);
-  const [transactionName, setTransactionName] = useState('');
-  const [transactionAmount, setTransactionAmount] = useState('');
-  const [transactionType, setTransactionType] = useState('income');
-  const [selectedMenu, setSelectedMenu] = useState('addTransaction');
-
-
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
-  };
-
-
-  const handleTransactionSubmit = () => {
-    const newTransaction = {
-      name: transactionName,
-      amount: parseFloat(transactionAmount),
-      type: transactionType,
-    };
-
-    setTransactions([...transactions, newTransaction]);
-    setTransactionName('');
-    setTransactionAmount('');
   };
 
   return (
@@ -40,34 +20,18 @@ function App() {
       </div>
       {isDropdownOpen && (
         <div className="dropdown-content">
-            <span onClick={() => setSelectedMenu('addTransaction')}>Add Transaction</span>
-            <span onClick={() => setSelectedMenu('transactionHistory')}>Transaction History</span>
-            <span onClick={() => setSelectedMenu('balance')}>Balance</span>
+            <span><Link to="/login">Login</Link></span>
+            <span><Link to="/register">Register</Link></span>
         </div>
       )}
     </div>
       <h1>Income and Expense Management</h1>
-      <div>
-        {selectedMenu === 'addTransaction' && (
-          <AddTransaction
-            transactionName={transactionName}
-            setTransactionName={setTransactionName}
-            transactionAmount={transactionAmount}
-            setTransactionAmount={setTransactionAmount}
-            transactionType={transactionType}
-            setTransactionType={setTransactionType}
-            handleTransactionSubmit={handleTransactionSubmit}
-          />
-        )}
-
-        {selectedMenu === 'transactionHistory' && (
-          <TransactionHistory transactions={transactions} />
-        )}
-
-        {selectedMenu === 'balance' && (
-          <Balance />
-        )}
-      </div>
+      <Routes>
+        <Route path="/" element={<h3>Welcome!</h3>}/>
+        <Route path="/login" element={<LoginForm/>}/>
+        <Route path="/register" element={<RegisterForm/>}/>
+        <Route path='/:email/transactions' element={<BaseTransaction/>}/>
+      </Routes>
     </div>
   );
 }

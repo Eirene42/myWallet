@@ -65,16 +65,24 @@ h1 {
 .dropdown-content span {
   padding: 16px 20px;
   border-radius: 5%;
-  color: #282c34;
   display: block;
+  cursor: pointer;
 }
 
 .dropdown-content span:hover {
   background-color: #007d999f;
 }
 
+a {
+  text-decoration: none;
+  color: #005667;
+  font-weight: bold;
+}
+
 input[type="text"],
 input[type="number"],
+input[type="email"],
+input[type="password"],
 select,
 button {
   width: 60%;
@@ -133,4 +141,15 @@ li.income {
 li.expense {
   background-color: #ffb6b6;
   color: #500000;
+}
+
+form div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+form label {
+  left: 0%;
 }
