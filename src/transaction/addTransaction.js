@@ -3,7 +3,6 @@ import axios from 'axios';
 
 function AddTransaction({transactionName, setTransactionName, transactionAmount, setTransactionAmount, transactionType, setTransactionType}) {
 
-
     const sendTransactionToServer = (transactionData) => {
         axios.post('http://localhost:4000/transactions', transactionData)
           .then((response) => {

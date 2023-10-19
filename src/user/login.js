@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -19,7 +22,7 @@ function LoginForm() {
           email: '',
           password: ''
         });
-        window.location.href = `/${formData.email}/transactions`;
+        navigate(`/${formData.email}/transactions`);
       })
     .catch((error) => {
         console.error('Loggin failed:', error);
