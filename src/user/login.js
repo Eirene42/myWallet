@@ -23,10 +23,10 @@ function LoginForm() {
           password: ''
         });
         navigate(`/${formData.email}/transactions`);
-      })
+    })
     .catch((error) => {
         console.error('Loggin failed:', error);
-        });
+    });
   };
 
   return (

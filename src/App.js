@@ -1,47 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import LoginForm from './user/login';
 import RegisterForm from './user/register';
 import BaseTransaction from './transaction/baseTransaction';
 import Profile from './user/profile';
-import { Route, Routes, Link, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import AddTransaction from './transaction/addTransaction';
 import Balance from './transaction/balance';
 import TransactionHistory from './transaction/transactionHistory';
+import FirstMenu from './menu/firstMenu';
 
 function App() {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const location = useLocation();
-
-  const isLoginOrRegister = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/';
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
-
-  const menuItems = (
-    <div className="dropdown-content">
-      <span><Link to="/login">Login</Link></span>
-      <span><Link to="/register">Register</Link></span>
-    </div>
-  );
-
-  let renderMenu;
-
-  if (isLoginOrRegister) {
-    renderMenu = (
-      <div className="dropdown">
-        <div className="dropdown-toggle" onClick={toggleDropdown}>
-          <span className="menu-icon">☰</span>
-        </div>
-        {isDropdownOpen && menuItems}
-      </div>
-    );
-  };
 
   return (
     <div className="App">
-      {renderMenu}
+      <FirstMenu />
       <h1>Income and Expense Management</h1>
       <Routes>
         <Route path="/" element={<h3>Welcome!</h3>} />

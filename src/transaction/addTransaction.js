@@ -1,45 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import SecondMenu from '../menu/secondMenu';
 
-function AddTransaction({transactionName, setTransactionName, transactionAmount, setTransactionAmount, transactionType, setTransactionType}) {
+function AddTransaction() {
+  const { email } = useParams();
+  const [transactionData, setTransactionData] = useState({
+    user: {email},
+    name: '',
+    amount: '',
+    type: 'income'
+  });
 
-    const sendTransactionToServer = (transactionData) => {
-        axios.post('http://localhost:4000/transactions', transactionData)
-          .then((response) => {
-            console.log('Transaction added:', response.data);
-            setTransactionName('');
-            setTransactionAmount('');
-            setTransactionType('income');
-          })
-          .catch((error) => {
-            console.error('Error fetching transactions:', error);
-          });
-      };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setTransactionData({ ...transactionData, [name]: value });
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post('http://localhost:4000/transactions', transactionData)
+      .then((response) => {
+        console.log('Transaction added:', response.data);
+        setTransactionData({
+          name: '',
+          amount: '',
+          type: ''
+        });
+    })
+    .catch((error) => {
+      console.error('Error adding transaction:', error);
+    });
+  };
 
   return (
     <div>
+      <SecondMenu email={email}/>
       <h2>Add Transaction</h2>
-      <input
-        type="text"
-        placeholder="Transaction Name"
-        value={transactionName}
-        onChange={(e) => setTransactionName(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Transaction Amount"
-        value={transactionAmount}
-        onChange={(e) => setTransactionAmount(e.target.value)}
-      />
-      <select
-        value={transactionType}
-        onChange={(e) => setTransactionType(e.target.value)}
-      >
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select>
-      <button onClick={() => sendTransactionToServer({ name: transactionName, amount: transactionAmount, type: transactionType })}>Add Transaction</button>
+      <form>
+        <input
+          type="text"
+          placeholder="Transaction Name"
+          name = "name"
+          value={transactionData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Transaction Amount"
+          name = "amount"
+          value={transactionData.amount}
+          onChange={handleChange}
+          required
+        />
+        <select
+          name = "type"
+          value={transactionData.type}
+          onChange={handleChange}
+          required
+        >
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+        <button type="submit" onClick={handleSubmit}>Add Transaction</button>
+      </form>
     </div>
   );
 }

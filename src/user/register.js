@@ -7,7 +7,7 @@ function RegisterForm() {
     age: '',
     job: '',
     email: '',
-    password: '',
+    password: ''
   });
 
   const handleChange = (e) => {
