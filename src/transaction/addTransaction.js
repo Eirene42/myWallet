@@ -5,15 +5,9 @@ import SecondMenu from '../menu/secondMenu';
 
 function AddTransaction() {
   const { email } = useParams();
-  let thisEmail;
-
-  if (thisEmail != null) {
-    window.sessionStorage.setItem("key", email);
-  } 
-  thisEmail = sessionStorage.getItem("key");
 
   const [transactionData, setTransactionData] = useState({
-    user: {email: thisEmail},
+    user: {email},
     name: '',
     amount: '',
     type: 'income'
@@ -31,6 +25,7 @@ function AddTransaction() {
       .then((response) => {
         console.log('Transaction added:', response.data);
         setTransactionData({
+          user: {email},
           name: '',
           amount: '',
           type: 'income'

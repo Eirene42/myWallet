@@ -44,7 +44,7 @@ function TransactionHistory() {
           {transactions.map((transaction) => (
             <div key={transaction.id} className='history-container'>
               <li className={transaction.type === 'income' ? 'income' : 'expense'}>
-                {transaction.name} - {transaction.type}: €{transaction.amount}
+                {transaction.name} - {transaction.type}:{transaction.amount} €
               </li>
               <button
                 className="delete-button"
