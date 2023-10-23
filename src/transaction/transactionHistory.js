@@ -42,7 +42,7 @@ function TransactionHistory() {
       {Array.isArray(transactions) && transactions.length > 0 ? (
         <ul>
           {transactions.map((transaction) => (
-            <div key={transaction.id}>
+            <div key={transaction.id} className='history-container'>
               <li className={transaction.type === 'income' ? 'income' : 'expense'}>
                 {transaction.name} - {transaction.type}: €{transaction.amount}
               </li>
