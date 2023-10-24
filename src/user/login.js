@@ -26,6 +26,7 @@ function LoginForm() {
     })
     .catch((error) => {
         console.error('Loggin failed:', error);
+        alert("Email or password are incorrect! Please try again...")
     });
   };
 

@@ -9,6 +9,8 @@ import AddTransaction from './transaction/addTransaction';
 import Balance from './transaction/balance';
 import TransactionHistory from './transaction/transactionHistory';
 import FirstMenu from './menu/firstMenu';
+import EditProfile from './user/editProfile';
+import Basic from './transaction/basic.js';
 
 function App() {
 
@@ -16,10 +18,14 @@ function App() {
     <div className="App">
       <FirstMenu />
       <h1>Income and Expense Management</h1>
+    <footer className="footer">
+      <p>&copy; 2023 Boolean. All rights reserved.</p>
+    </footer>
       <Routes>
-        <Route path="/" element={<h3>Welcome!</h3>} />
+        <Route path="/" element={<Basic/>} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/edit-profile/:email" element={<EditProfile/>} />
         <Route path='/:email/transactions/*' element={<BaseTransaction />} />
         <Route path='/:email/transactions/profile' element={<Profile />} />
         <Route path='/:email/transactions/addTransaction' element={<AddTransaction />} />

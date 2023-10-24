@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import SecondMenu from '../menu/secondMenu';
 
 function Profile() {
@@ -32,6 +32,7 @@ function Profile() {
         <div>
             <SecondMenu email={email}/>
             <h2>Profile</h2>
+            <Link to={`/edit-profile/${email}`} className="edit-link">✎</Link>
             <div className="profile-container">
                 <div className="profile-image">
                 <img

@@ -190,3 +190,74 @@ form label {
 .profile-info p {
   margin: 7px 0;
 }
+
+.edit-link {
+  display: incline-block;
+  float: right;
+  margin-top: 2px;
+  color: #fff;
+  padding: 8px 13px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.edit-link:hover {
+  background-color: #4d8dd1;
+}
+
+.footer {
+  color: #ffffffae;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+p {
+  padding: 10px 50px;
+  word-spacing: 1px;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin: 10px;
+  margin-top: 40px;
+  height: fit-content;
+  padding: 10px;
+  text-align: center;
+  width: calc(30% - 20px);
+  flex: 1;
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.card h2 {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #005669;
+}
+
+.card p {
+  font-size: 14px;
+  color: #007b94;
+  padding: 5px;
+}
+
