@@ -1,11 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import Menu from '../menu/Μenu';
 
 function EditProfile() {
-    const { email } = useParams();
     const [formData, setFormData] = useState({
-        name: '',
         age: '',
         job: '',
         password: ''
@@ -19,11 +17,16 @@ function EditProfile() {
     const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put(`http://localhost:4000/users/edit-profile/${email}`, formData)
+    if (formData.age === '' || formData.job === '' || formData.password === '') {
+        alert('All fields are required.');
+        return;
+      }
+
+    axios.put(`http://localhost:4000/users/edit-profile`, formData, {withCredentials: true})
         .then((response) => {
         console.log('Updating successful:', response.data);
+        alert("Updating done successfully!")
         setFormData({
-            name: '',
             age: '',
             job: '',
             password: '',
@@ -31,24 +34,15 @@ function EditProfile() {
         })
         .catch((error) => {
         console.error('Error during updating:', error);
+        alert("Updating failed!")
         });
     };
 
     return (
     <div>
+        <Menu />
         <h2>Update your personal info</h2>
         <form>
-        <div>
-            <label htmlFor="name">Name</label>
-            <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            />
-        </div>
         <div>
             <label htmlFor='age'>Age</label>
             <input

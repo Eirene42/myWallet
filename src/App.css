@@ -20,7 +20,7 @@ body, h1, h2 {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #f3f5f7;
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ input[type="email"],
 input[type="password"],
 select,
 button {
-  width: 60%;
+  width: 70%;
   font-size: 15px;
   padding: 10px;
   margin: 5px 0;
@@ -122,6 +122,12 @@ button:hover {
   cursor: pointer;
 }
 
+.image img{
+  width: 80%;
+  height: 300px;
+  margin-top: 30px;
+}
+
 .history-container {
   display: flex;
   align-items: center;
@@ -132,22 +138,25 @@ button:hover {
 ul {
   list-style: none;
   padding: 0;
+  margin: 50px;
 }
 
 li {
   font-size: 14px;
   border-radius: 4px;
-  padding: 15px;
+  padding: 12px 50px;
+  font-weight: bold;
+  font-size: 18px;
   margin: 5px 20px;
 }
 
 li.income {
-  background-color: #c2f3c2;
+  background-color: #c2f3c2d7;
   color: #005700;
 }
 
 li.expense {
-  background-color: #ffb6b6;
+  background-color: #ffb6b6d5;
   color: #500000;
 }
 
@@ -163,85 +172,123 @@ form label {
 }
 
 .profile-container {
+  background-color: #083360aa;
+  border-radius: 15%;
+  width: 60%;
+  padding: 30px;
   display: flex;
+  text-align: center;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+}
+
+.profile-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.profile-card {
+  grid-column: 1;
+  margin-top: 70px;
+  margin-left: 15%;
 }
 
 .profile-image img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin-right: 20px;
+  width: 80px;
+  height: 80px;
 }
 
 .profile-info {
-  text-align: left;
+  text-align: center;
 }
 
 .profile-info h1 {
   font-size: 24px;
-  margin: 10px 0;
+  margin: 0;
+  margin-bottom: 40px;
 }
 
 .profile-info p {
-  margin: 7px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 22px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.profile-info p strong {
+  font-size: 18px;
+  color: #2fc6fd;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.achievements {
+  grid-column: 2;
 }
 
 .edit-link {
   display: incline-block;
-  float: right;
-  margin-top: 2px;
+  float: left;
   color: #fff;
-  padding: 8px 13px;
+  padding: 10px 15px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 26px;
   cursor: pointer;
+  margin-right: 10px
 }
 
 .edit-link:hover {
-  background-color: #4d8dd1;
+  background-color: #4bb9e4;
 }
 
 .footer {
   color: #ffffffae;
-  padding: 10px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  padding: 10px 0;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 30px;
 }
 
-p {
-  padding: 10px 50px;
+.p-basic {
+  font-size: 20px;
   word-spacing: 1px;
+  letter-spacing: 1px;
+  padding: 10px 150px;
 }
 
 .card-row {
   display: flex;
   justify-content: space-between;
-  max-width: 70%;
+  max-width: 60%;
+  margin-bottom: 50px;
   margin: 0 auto;
 }
 
 .card {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   border-radius: 20px;
-  margin: 10px;
+  margin: 20px;
   margin-top: 40px;
-  height: fit-content;
   padding: 10px;
   text-align: center;
   width: calc(30% - 20px);
   flex: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: perspective(1px) translateY(0);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: perspective(1px) translateY(-10px);
 }
 
 .card img {
@@ -250,14 +297,168 @@ p {
 }
 
 .card h2 {
-  font-size: 16px;
+  font-size: 20px;
   margin-top: 10px;
   color: #005669;
 }
 
 .card p {
-  font-size: 14px;
+  font-size: 16px;
   color: #007b94;
   padding: 5px;
 }
 
+.balance-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.balance {
+  font-size: 32px;
+  margin-right: 50px;
+  color: #79f87f;
+  text-shadow: 2px 1px 0 rgba(96, 197, 101, 0.993);
+}
+
+.balance.negative {
+  font-size: 32px;
+  margin-right: 50px;
+  color: #ee6c6c;
+  text-shadow: 2px 1px 0 rgba(190, 86, 72, 0.993);
+}
+
+.stats {
+  font-size: 18px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.export-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.financial-tips-container {
+  background-color: #a0a8d63a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.financial-tips-container h2 {
+  font-size: 20px;
+}
+
+.tips-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-list li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin: 0;
+}
+
+.tips-list .tip-icon {
+  font-size: 24px;
+  min-width: 40px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7fdcf3;
+  color: #0b2c72;
+  border-radius: 50%;
+}
+
+.tips-list .tip-text {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.tips-list .tip-text p {
+  text-align: left;
+  margin: 0;
+}
+
+.achievements {
+  margin: 0;
+}
+
+.achievement-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 10% 80px;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.achievement {
+  flex: 0 0 calc(20% - 10px);
+  margin: 10px;
+  padding: 20px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgb(110, 173, 246);
+  transform: perspective(1px) translateY(0);
+  transition: transform 0.2s;
+}
+
+.achievement:hover {
+  transform: perspective(1px) translateY(-10px);
+}
+
+.achieve-icon {
+  color: #fde038;
+  font-size: 60px;
+  margin: 0 auto;
+}
+
+.achievement h4 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.achievement p {
+  font-size: 15px;
+  color: #a3d2f8;
+}
+
+.logOut {
+  font-size: 26px;
+  position: fixed;
+  right: 5%;
+  top: 5%;
+  text-align: right;
+}
+
+.logOut:hover {
+  color: #6cb8c9;
+}
+
+.github{
+  margin: 30px;
+  font-size: 20px;
+  padding: 10px;
+  border: 1px solid #498d9a;
+  border-radius: 4px;
+  background-color: #ffffffa7;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.github:hover {
+  background-color: #498d9a;
+}
+
+.github-icon {
+  color: #005667;
+  margin-right: 10px;
+  font-size: 25px;
+}

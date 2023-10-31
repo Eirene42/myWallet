@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import SecondMenu from '../menu/secondMenu';
+import Menu from '../menu/Μenu';
 
 function AddTransaction() {
-  const { email } = useParams();
 
   const [transactionData, setTransactionData] = useState({
-    user: {email},
     name: '',
     amount: '',
     type: 'income'
@@ -21,11 +18,10 @@ function AddTransaction() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:4000/transactions', transactionData)
+    axios.post('http://localhost:4000/transactions', transactionData, {withCredentials: true})
       .then((response) => {
         console.log('Transaction added:', response.data);
         setTransactionData({
-          user: {email},
           name: '',
           amount: '',
           type: 'income'
@@ -38,7 +34,7 @@ function AddTransaction() {
 
   return (
     <div>
-      <SecondMenu email={email}/>
+      <Menu />
       <h2>Add Transaction</h2>
       <form>
         <input

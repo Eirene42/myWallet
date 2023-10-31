@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import SecondMenu from '../menu/secondMenu';
+import Menu from '../menu/Μenu';
+import FinancialTips from '../extras/financialTips';
 
 function Balance() {
-    const { email } = useParams();
 
     const [transactions, setTransactions] = useState([]);
     const [incomes, setIncomes] = useState([]);
@@ -12,7 +11,7 @@ function Balance() {
     const [balance, setBalance] = useState(0);
 
     const fetchTransactions = () => {
-        axios.get(`http://localhost:4000/transactions/${email}`).then((response) => {
+        axios.get(`http://localhost:4000/transactions/get`, {withCredentials: true}).then((response) => {
           setTransactions(response.data);
         }).catch((error) => {
           console.error('Error fetching transactions:', error);
@@ -43,11 +42,20 @@ function Balance() {
 
     return (
         <div>
-            <SecondMenu email={email}/>
-            <h2>Balance</h2>
-            <p>Your current balance: {balance} €</p>
-            <p>{incomes} € incomes / {expenses} € expenses</p>
+          <Menu />
+          <h2>Balance</h2>
+          <div className='balance-container'>
+            <div className='balance-part'>
+                <p className={`balance ${balance < 0 ? 'negative' : ''}`}>
+                    Your current balance: {balance} €
+                </p>
+                <p className="stats">
+                    {incomes} € incomes / {expenses} € expenses
+                </p>
+            </div>
+          <FinancialTips/>
+          </div>
         </div>
-    );
+      );
 }
 export default Balance;

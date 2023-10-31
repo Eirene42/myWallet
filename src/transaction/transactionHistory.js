@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import SecondMenu from '../menu/secondMenu';
+import Menu from '../menu/Μenu';
 
 function TransactionHistory() {
-  const { email } = useParams();
 
   const [transactions, setTransactions] = useState([]);
 
-  const fetchTransactions = () => {
-    axios.get(`http://localhost:4000/transactions/${email}`).then((response) => {
+  const fetchTransactions = async () => {
+
+    axios.get(`http://localhost:4000/transactions/get}`, {withCredentials: true}).then((response) => {
       setTransactions(response.data);
     }).catch((error) => {
       console.error('Error fetching transactions:', error);
@@ -17,7 +16,7 @@ function TransactionHistory() {
   };
 
   const handleDeleteTransaction = (id) => {
-      axios.delete(`http://localhost:4000/transactions/${id}`).then((response) => {
+      axios.delete(`http://localhost:4000/transactions/${id}`, {withCredentials: true}).then((response) => {
         setTransactions(response.data);
       fetchTransactions();
     })
@@ -27,17 +26,29 @@ function TransactionHistory() {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/transactions/${email}`).then((response) => {
+    axios.get(`http://localhost:4000/transactions/get`, {withCredentials: true}).then((response) => {
         setTransactions(response.data);
       })
       .catch((error) => {
         console.error('Error fetching transactions:', error);
-      });
-    }, [email]);
+    });
+  }, []);
+
+
+  const exportTransactions = () => {
+    const csv = transactions.map(transaction => Object.values(transaction).join(', ')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'transactions.csv';
+    a.dispatchEvent(new MouseEvent('click'));
+    window.URL.revokeObjectURL(a.href);
+  }
+
 
   return (
     <div>
-      <SecondMenu email={email}/>
+      <Menu />
       <h2>Transaction History</h2>
       {Array.isArray(transactions) && transactions.length > 0 ? (
         <ul>
@@ -56,6 +67,9 @@ function TransactionHistory() {
       ) : (
         <p>No transactions available...</p>
       )}
+      <div class="export-button-container">
+        <button id="export-button" onClick={exportTransactions}>Export Transactions</button>
+      </div>
     </div>
   );
 }
